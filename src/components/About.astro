@@ -1,0 +1,133 @@
+---
+import WhatsAppCta from './WhatsAppCta.astro';
+---
+
+<section class="about-section" id="nosotros">
+  <div class="about-glow" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="about-top">
+      <div>
+        <div class="section-eyebrow">Sobre Aguaflor</div>
+        <h2 class="section-title js-split-heading">Pureza natural<br />en cada gota</h2>
+      </div>
+
+      <div class="about-story">
+        <p>
+          Aguaflor nace con el propósito de llevar agua de la más alta calidad a cada hogar en Chanchamayo, manteniendo intacta su pureza natural y sabor ligero y refrescante.
+        </p>
+        <p>
+          Nuestra filosofía se resume en una verdad simple: <strong>&ldquo;lo natural siempre es mejor&rdquo;</strong>. Por eso ofrecemos agua de mesa sin gas, sin aditivos ni conservantes, adaptada a cada momento del día.
+        </p>
+      </div>
+    </div>
+
+    <div class="purity-grid" id="purity-grid">
+      <article class="purity-card">
+        <div class="purity-icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path
+              class="purity-draw"
+              d="M16 3C16 3 25 13.5 25 20a9 9 0 0 1-18 0C7 13.5 16 3 16 3Z"
+              stroke="#8FD6FF"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              class="purity-draw"
+              d="M12.5 20.5a3.8 3.8 0 0 0 3.8 3.6"
+              stroke="#FFC61A"
+              stroke-width="2.2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <h3>100% Natural</h3>
+        <p>Agua de mesa sin gas, completamente libre de aditivos químicos y conservantes artificiales.</p>
+      </article>
+
+      <article class="purity-card">
+        <div class="purity-icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path
+              class="purity-draw"
+              d="M6 25C15 25 25 17 26 6C15 7 7 14 6 25Z"
+              stroke="#8FD6FF"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              class="purity-draw"
+              d="M6 25C11 20 15.5 16.5 21 12"
+              stroke="#FFC61A"
+              stroke-width="2.2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <h3>Pura y Refrescante</h3>
+        <p>Sabor equilibrado y cristalino diseñado para hidratar tu cuerpo en climas cálidos y actividad diaria.</p>
+      </article>
+
+      <article class="purity-card">
+        <div class="purity-icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path
+              class="purity-draw"
+              d="M10.5 9.5L16 4l5.5 5.5"
+              stroke="#8FD6FF"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              class="purity-draw"
+              d="M23.5 13l3.5 8.5-5.5 5.5H10.5L5 21.5 8.5 13"
+              stroke="#8FD6FF"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              class="purity-draw"
+              d="M12.5 21h7"
+              stroke="#FFC61A"
+              stroke-width="2.2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <h3>Envases Reciclables</h3>
+        <p>Botellas PET y bidones de alta resistencia pensados para cuidar el entorno natural de nuestra selva central.</p>
+      </article>
+    </div>
+
+    <div class="metrics-strip" id="metrics-strip">
+      <div class="metric-item">
+        <span class="metric-value js-counter" data-target="100" data-suffix="%">100%</span>
+        <span class="metric-label">Pureza sin conservantes</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-value js-counter" data-target="0" data-suffix="%">0%</span>
+        <span class="metric-label">Gas añadido</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-value js-counter" data-target="4" data-suffix="">4</span>
+        <span class="metric-label">Presentaciones de 500ml a 20L</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-value js-counter" data-target="100" data-suffix="%">100%</span>
+        <span class="metric-label">Envases reciclables</span>
+      </div>
+    </div>
+
+    <WhatsAppCta
+      variant="underwater"
+      kicker="Pureza 100% natural directo a tu hogar u oficina"
+      label="Consultar entrega por WhatsApp"
+      message="Hola Aguaflor, quiero consultar disponibilidad y zonas de reparto en La Merced y San Ramón."
+    />
+  </div>
+</section>

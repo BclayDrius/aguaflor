@@ -1,0 +1,48 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Aguaflor · Agua de mesa sin gas | Lo natural siempre es mejor',
+  description = 'Disfruta del agua más pura y refrescante con Aguaflor. Presentaciones de 500 ml, 650 ml, 7 L y 20 L en La Merced y San Ramón – Chanchamayo.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0A1F5C" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Outfit:wght@400;500;600;700&family=Caveat+Brush&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Depth indicator driven by scroll progress -->
+    <aside class="depth-gauge" id="depth-gauge" aria-hidden="true">
+      <span class="depth-gauge-label" id="depth-gauge-label">0m</span>
+      <div class="depth-gauge-track">
+        <div class="depth-gauge-fill" id="depth-gauge-fill"></div>
+        <span class="depth-gauge-droplet" id="depth-gauge-droplet"></span>
+      </div>
+    </aside>
+
+    <slot />
+
+    <script src="../scripts/animations.ts"></script>
+  </body>
+</html>

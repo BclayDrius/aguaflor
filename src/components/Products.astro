@@ -1,0 +1,195 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { PRODUCTS, BRAND } from '../data/products';
+import WhatsAppCta from './WhatsAppCta.astro';
+
+const modalProductsPayload = await Promise.all(
+  PRODUCTS.map(async (p) => {
+    const optimized = await getImage({
+      src: p.image,
+      width: 720,
+      format: 'webp',
+      quality: 84,
+    });
+    return {
+      id: p.id,
+      name: p.name,
+      badge: p.badge,
+      photoStyle: p.photoStyle,
+      imageSrc: optimized.src,
+      fullDescription: p.fullDescription,
+      idealFor: p.idealFor,
+      specs: p.specs,
+      waUrl: `https://wa.me/${BRAND.whatsappNumber}?text=${encodeURIComponent(
+        `Hola Aguaflor, me interesa pedir ${p.name}.`
+      )}`,
+    };
+  })
+);
+---
+
+<section class="products-section" id="productos">
+  <!-- Caustic light rays -->
+  <div class="caustic-ray" data-ray style="left: 10%; width: 260px; height: 760px;"></div>
+  <div class="caustic-ray" data-ray style="left: 44%; width: 350px; height: 900px; opacity: 0.72;"></div>
+  <div class="caustic-ray" data-ray style="left: 76%; width: 230px; height: 680px;"></div>
+
+  <!-- Parallax underwater bubbles (3 depth planes) -->
+  <div class="bubble-layer" aria-hidden="true">
+    <div class="bubble" data-bubble-depth="1" style="left: 5%; top: 18%; width: 24px; height: 24px;"></div>
+    <div class="bubble" data-bubble-depth="2" style="left: 16%; top: 68%; width: 16px; height: 16px;"></div>
+    <div class="bubble" data-bubble-depth="3" style="left: 24%; top: 14%; width: 14px; height: 14px;"></div>
+    <div class="bubble" data-bubble-depth="2" style="left: 31%; top: 44%; width: 42px; height: 42px;"></div>
+    <div class="bubble" data-bubble-depth="1" style="left: 47%; top: 24%; width: 20px; height: 20px;"></div>
+    <div class="bubble" data-bubble-depth="3" style="left: 54%; top: 58%; width: 58px; height: 58px;"></div>
+    <div class="bubble" data-bubble-depth="1" style="left: 65%; top: 82%; width: 34px; height: 34px;"></div>
+    <div class="bubble" data-bubble-depth="2" style="left: 71%; top: 19%; width: 28px; height: 28px;"></div>
+    <div class="bubble" data-bubble-depth="3" style="left: 84%; top: 41%; width: 22px; height: 22px;"></div>
+    <div class="bubble" data-bubble-depth="2" style="left: 92%; top: 65%; width: 48px; height: 48px;"></div>
+    <div class="bubble" data-bubble-depth="1" style="left: 11%; top: 88%; width: 26px; height: 26px;"></div>
+    <div class="bubble" data-bubble-depth="3" style="left: 78%; top: 86%; width: 18px; height: 18px;"></div>
+  </div>
+
+  <div class="container">
+    <div class="section-header-row">
+      <div>
+        <div class="section-eyebrow">Nuestras presentaciones</div>
+        <h2 class="section-title js-split-heading">Cuatro formas<br />de beber lo natural</h2>
+      </div>
+      <p class="section-subtitle">
+        Elige la presentación que mejor se adapte a tu rutina, tu hogar, tu oficina o tus eventos.
+      </p>
+    </div>
+
+    <div class="filter-bar" role="tablist" aria-label="Filtrar presentaciones por categoría">
+      <button type="button" class="filter-btn is-active" data-filter="all" role="tab" aria-selected="true">
+        Todas (4)
+      </button>
+      <button type="button" class="filter-btn" data-filter="personal" role="tab" aria-selected="false">
+        Personal
+      </button>
+      <button type="button" class="filter-btn" data-filter="familiar" role="tab" aria-selected="false">
+        Familiar
+      </button>
+      <button type="button" class="filter-btn" data-filter="gran-capacidad" role="tab" aria-selected="false">
+        Gran capacidad
+      </button>
+    </div>
+
+    <div class="product-grid" id="product-grid">
+      {PRODUCTS.map((product) => (
+        <article
+          class="product-card"
+          data-category={product.category}
+          data-product-id={product.id}
+          style={`--card-offset: ${product.offsetDesktop}px;`}
+        >
+          <div class="numeral" data-parallax-numeral aria-hidden="true">
+            {product.numeral}
+            {product.unit === 'L' && <span class="numeral-unit">L</span>}
+          </div>
+
+          <div class="product-capsule" data-tilt-card>
+            <div class={`photo-frame photo-frame--${product.photoStyle}`}>
+              {product.highlightTag && <span class="photo-tag">{product.highlightTag}</span>}
+              <Image
+                src={product.image}
+                alt={product.name}
+                width={720}
+                widths={[360, 720]}
+                sizes="(max-width: 600px) 88vw, (max-width: 1120px) 44vw, 290px"
+                format="webp"
+                quality={84}
+                class="product-photo"
+              />
+            </div>
+
+            <div class="product-meta">
+              <div class="product-badge-row">
+                <span class="product-badge">{product.badge}</span>
+              </div>
+              <h3 class="product-title">{product.name}</h3>
+              <p class="product-desc">{product.shortDescription}</p>
+
+              <div class="product-chips">
+                {product.highlights.map((chip) => (
+                  <span class="product-chip">{chip}</span>
+                ))}
+              </div>
+
+              <div class="product-actions">
+                <button
+                  type="button"
+                  class="btn-link-underline js-select-order"
+                  data-order-product={product.name}
+                >
+                  Pedir →
+                </button>
+                <button
+                  type="button"
+                  class="btn-detail js-open-modal"
+                  data-modal-product={product.id}
+                >
+                  Ver ficha
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <WhatsAppCta
+      variant="underwater"
+      kicker="¿Ya elegiste tu formato? Te llevamos botellas o bidones hoy mismo"
+      label="Pedir mi presentación por WhatsApp"
+      message="Hola Aguaflor, vi sus presentaciones (500ml, 650ml, 7L y 20L) y quiero hacer un pedido."
+    />
+  </div>
+</section>
+
+<!-- Product Specification Modal -->
+<div
+  class="product-modal"
+  id="product-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-product-title"
+  aria-hidden="true"
+>
+  <div class="product-modal-backdrop" id="modal-backdrop"></div>
+  <div class="product-modal-dialog" id="modal-dialog">
+    <button type="button" class="modal-close" id="modal-close" aria-label="Cerrar ficha">✕</button>
+
+    <div class="modal-photo-wrap" id="modal-photo-wrap">
+      <img id="modal-product-img" src="" alt="" />
+    </div>
+
+    <div>
+      <span class="product-badge" id="modal-product-badge">Personal</span>
+      <h3 class="modal-title" id="modal-product-title">Aguaflor</h3>
+      <p class="modal-desc" id="modal-product-desc"></p>
+
+      <div class="modal-subhead">Ideal para</div>
+      <div class="product-chips" id="modal-product-ideal"></div>
+
+      <div class="modal-subhead">Características técnicas</div>
+      <ul class="modal-specs" id="modal-product-specs"></ul>
+
+      <div class="modal-actions">
+        <a id="modal-wa-link" href="#" target="_blank" rel="noopener" class="pill pill-sun">
+          Pedir por WhatsApp
+        </a>
+        <button type="button" id="modal-to-form" class="pill pill-outline" style="color: #fff; border-color: rgba(143,214,255,0.5);">
+          Ir al formulario
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script
+  id="products-modal-data"
+  type="application/json"
+  set:html={JSON.stringify(modalProductsPayload)}
+/>

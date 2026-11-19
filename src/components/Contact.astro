@@ -1,0 +1,161 @@
+---
+import { Image } from 'astro:assets';
+import libroRecla from '../assets/images/librorecla.png';
+import { BRAND, PRODUCTS } from '../data/products';
+import WhatsAppCta from './WhatsAppCta.astro';
+
+const whatsappOrderHref = `https://wa.me/${BRAND.whatsappNumber}?text=${encodeURIComponent(
+  'Hola Aguaflor, quiero solicitar un pedido a domicilio.'
+)}`;
+---
+
+<section class="contact-section" id="contacto">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="section-eyebrow">Contáctanos</div>
+        <h2 class="contact-heading js-split-heading">Pide tu Aguaflor<br />hoy mismo.</h2>
+
+        <div style="margin-top: 32px;">
+          <a
+            href={whatsappOrderHref}
+            target="_blank"
+            rel="noopener"
+            class="pill pill-sun"
+            data-magnetic
+          >
+            Pedir por WhatsApp · {BRAND.phoneDisplay}
+          </a>
+        </div>
+
+        <div class="contact-info-grid">
+          <div>
+            <div class="contact-info-label">Horario</div>
+            <div>{BRAND.hours}</div>
+          </div>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <div><a href={`mailto:${BRAND.email}`}>{BRAND.email}</a></div>
+          </div>
+          <div>
+            <div class="contact-info-label">Envío a domicilio</div>
+            <div>{BRAND.delivery}</div>
+          </div>
+          <div>
+            <div class="contact-info-label">Dirección</div>
+            <div>{BRAND.address}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-card">
+        <h3 class="order-card-title">Arma tu pedido directo</h3>
+        <p class="order-card-sub">
+          Elige presentación y cantidad; preparamos tu mensaje directo o registramos tu solicitud.
+        </p>
+
+        <div class="order-chips" id="order-chips" role="radiogroup" aria-label="Selecciona presentación">
+          {PRODUCTS.map((p, idx) => (
+            <button
+              type="button"
+              class={`order-chip ${idx === 2 ? 'is-selected' : ''}`}
+              data-chip-product={p.name}
+            >
+              {p.shortLabel}
+            </button>
+          ))}
+        </div>
+
+        <div class="order-qty-row">
+          <span>Cantidad</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn" id="qty-minus" aria-label="Disminuir cantidad">−</button>
+            <span class="qty-value" id="qty-value">1</span>
+            <button type="button" class="qty-btn" id="qty-plus" aria-label="Aumentar cantidad">+</button>
+          </div>
+        </div>
+
+        <form class="order-form" id="order-form" novalidate>
+          <input type="hidden" name="product" id="order-product-input" value="Aguaflor 7 L" />
+          <input type="hidden" name="quantity" id="order-qty-input" value="1" />
+
+          <div class="order-field-row">
+            <input
+              type="text"
+              name="name"
+              class="order-input"
+              placeholder="Nombre completo *"
+              required
+            />
+            <input
+              type="tel"
+              name="phone"
+              class="order-input"
+              placeholder="Teléfono / WhatsApp *"
+              required
+            />
+          </div>
+
+          <input
+            type="email"
+            name="email"
+            class="order-input"
+            placeholder="Correo electrónico (opcional)"
+          />
+
+          <textarea
+            name="address"
+            rows="3"
+            class="order-input"
+            placeholder="Dirección de entrega en La Merced o San Ramón y referencia *"
+            required
+          ></textarea>
+
+          <button type="submit" class="pill pill-sun" id="order-submit-btn" style="width: 100%; margin-top: 4px;">
+            Enviar pedido ahora
+          </button>
+        </form>
+
+        <div class="order-feedback" id="order-feedback" aria-live="polite">
+          <div id="order-feedback-text"></div>
+          <a id="order-feedback-wa" href="#" target="_blank" rel="noopener" class="order-wa-direct">
+            Abrir pedido listo en WhatsApp →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <WhatsAppCta
+      variant="underwater"
+      kicker="¿Prefieres atención inmediata? Respuesta rápida por chat"
+      label={`Chatear por WhatsApp · ${BRAND.phoneDisplay}`}
+      message="Hola Aguaflor, deseo atención inmediata para coordinar mi pedido."
+    />
+
+    <footer class="site-footer">
+      <div>
+        <strong style="font-family: var(--font-brand); font-size: 26px; color: #fff;">Aguaflor</strong>
+        <span style="margin-left: 10px;">© 2026 AguaFlor. Todos los derechos reservados.</span>
+      </div>
+
+      <div class="footer-links">
+        {PRODUCTS.map((p) => (
+          <a href="#productos" class="js-select-order" data-order-product={p.name}>
+            {p.name}
+          </a>
+        ))}
+      </div>
+
+      <a
+        href={BRAND.reclamacionesUrl}
+        target="_blank"
+        rel="noopener"
+        class="reclamaciones-badge"
+        title="Libro de Reclamaciones Aguaflor"
+      >
+        <Image src={libroRecla} alt="Libro de Reclamaciones" width={112} height={70} class="reclamaciones-img" />
+        <span>Libro de Reclamaciones</span>
+      </a>
+    </footer>
+  </div>
+</section>

@@ -1,0 +1,142 @@
+---
+import { Image } from 'astro:assets';
+import logoHd from '../assets/images/logo-hd.png';
+import { BRAND } from '../data/products';
+import WhatsAppCta from './WhatsAppCta.astro';
+
+const whatsappHero = `https://wa.me/${BRAND.whatsappNumber}?text=${encodeURIComponent(
+  'Hola Aguaflor, quiero hacer un pedido de agua de mesa sin gas.'
+)}`;
+---
+
+<section class="hero-section" id="inicio">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-line"></span>
+        <span>Agua de mesa sin gas · Chanchamayo</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="hero-title-line">Lo natural<br />siempre<br />es </span>
+        <span class="hero-highlight">mejor.</span>
+      </h1>
+
+      <p class="hero-lead">
+        Disfruta del agua más pura y refrescante con Aguaflor, directamente de la naturaleza a tu hogar en sus cuatro presentaciones.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#productos" class="pill pill-dark" data-magnetic>
+          Ver productos <span aria-hidden="true">↓</span>
+        </a>
+        <a href={whatsappHero} target="_blank" rel="noopener" class="pill pill-outline" data-magnetic>
+          Pedir por WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-drop-stage" id="hero-drop-stage">
+      <!-- Invisible orbital SVG guides used by svg.createMotionPath -->
+      <svg class="hero-orbit-svg" viewBox="0 0 600 660" fill="none" aria-hidden="true">
+        <path
+          id="orbit-path-1"
+          d="M 55 430 C 10 250, 120 70, 310 55 C 500 40, 585 215, 540 390 C 495 565, 100 605, 55 430 Z"
+          stroke="rgba(255,255,255,0.22)"
+          stroke-dasharray="4 10"
+        />
+        <path
+          id="orbit-path-2"
+          d="M 540 280 C 570 430, 445 555, 290 545 C 135 535, 35 405, 68 250 C 100 95, 510 130, 540 280 Z"
+          stroke="none"
+        />
+        <path
+          id="orbit-path-3"
+          d="M 510 510 C 370 595, 165 565, 95 420 C 25 275, 150 95, 340 105 C 530 115, 600 425, 510 510 Z"
+          stroke="none"
+        />
+      </svg>
+
+      <!-- Main refractive interactive drop -->
+      <div
+        class="hero-drop-draggable"
+        id="hero-drop-draggable"
+        title="Arrastra o toca la gota"
+        role="button"
+        tabindex="0"
+        aria-label="Gota interactiva Aguaflor: arrastra o presiona para generar ondas"
+      >
+        <div class="hero-drop-shell" id="hero-drop-shell">
+          <div class="hero-drop-teardrop"></div>
+          <Image
+            src={logoHd}
+            alt="Aguaflor, lo natural siempre es mejor"
+            width={640}
+            height={640}
+            loading="eager"
+            class="logo-fade"
+            id="hero-drop-logo"
+          />
+          <span class="drop-hint" id="drop-hint">
+            <span class="drop-hint-dot"></span>
+            Arrastra o toca la gota
+          </span>
+        </div>
+      </div>
+
+      <!-- Satellite drops following SVG motion paths -->
+      <div class="sat-drop sat-drop--cyan-lg" id="sat-drop-1" aria-hidden="true"></div>
+      <div class="sat-drop sat-drop--cyan-sm" id="sat-drop-2" aria-hidden="true"></div>
+      <div class="sat-drop sat-drop--sun" id="sat-drop-3" aria-hidden="true"></div>
+
+      <!-- Concentric ripples under the drop -->
+      <div class="hero-ripples" id="hero-ripples" aria-hidden="true">
+        <div class="hero-ripple hero-ripple--1"></div>
+        <div class="hero-ripple hero-ripple--2"></div>
+        <div class="hero-ripple hero-ripple--3"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container hero-cta-wrap">
+    <WhatsAppCta
+      variant="surface"
+      kicker="¿Necesitas agua ahora? Reparto rápido en Chanchamayo"
+      label="Pedir directo por WhatsApp"
+      message="Hola Aguaflor, quiero hacer un pedido rápido de agua de mesa sin gas."
+    />
+  </div>
+
+  <!-- Dive scroll indicator -->
+  <a href="#productos" class="scroll-cue">
+    <span class="scroll-cue-bar"><span class="scroll-cue-fill" id="scroll-cue-fill"></span></span>
+    <span>Sumérgete</span>
+  </a>
+
+  <!-- Dual-layer SVG waves with morph targets -->
+  <svg class="hero-waves" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <path
+      id="wave-back"
+      d="M0 64 C 240 8 480 120 720 64 S 1200 8 1440 64 V120 H0 Z"
+      fill="rgba(143,214,255,.32)"
+    />
+    <path
+      id="wave-front"
+      d="M0 86 C 260 40 520 128 780 82 S 1220 40 1440 86 V120 H0 Z"
+      fill="#0E3FA9"
+    />
+    <!-- Hidden morph targets for svg.morphTo -->
+    <path
+      id="wave-back-alt"
+      d="M0 52 C 260 112 500 14 760 72 S 1180 112 1440 52 V120 H0 Z"
+      fill="none"
+      visibility="hidden"
+    />
+    <path
+      id="wave-front-alt"
+      d="M0 78 C 280 124 540 34 800 90 S 1200 120 1440 72 V120 H0 Z"
+      fill="none"
+      visibility="hidden"
+    />
+  </svg>
+</section>
